@@ -15,19 +15,24 @@ namespace Learning
 
         public string CreateUser(string userName, string password)
         {
-            var isLettersOnly = Regex.IsMatch(userName, @"^[a-zA-Z]+$");
+            bool isLettersOnly = DoesUserNameContainsLetterOnly(userName);
             var passwordLength = password.Length;
             var atLeastOneChar = password.Any(p => char.IsLetter(p));
             var atLeastOneDigit = password.Any(p => char.IsDigit(p));
-            
+
             if (!isLettersOnly || passwordLength < 6 || !atLeastOneChar || !atLeastOneDigit)
             {
                 return "User creation failed";
             }
 
             Users.Add(userName, password);
-            
+
             return "User created successfully";
+        }
+
+        private static bool DoesUserNameContainsLetterOnly(string userName)
+        {
+            return Regex.IsMatch(userName, @"^[a-zA-Z]+$");
         }
     }
 }
