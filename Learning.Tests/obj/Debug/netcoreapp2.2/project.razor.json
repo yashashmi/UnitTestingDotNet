@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\yasub.hashmi\\source\\repos\\UnitTestingDotNet\\Learning.Tests\\Learning.Tests.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}
