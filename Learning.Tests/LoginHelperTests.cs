@@ -1,22 +1,22 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Learning.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class LoginHelperTests
     {
         string validPassword_;
         string validUser_;
 
-        [TestInitialize]
+        [SetUp]
         public void OneTimeSetup()
         {
             validPassword_ = "Password12";
             validUser_ = "David";
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnSuccessMessageOnSuccessfulLogin()
         {
             var userCreator = new UserCreator();
@@ -28,7 +28,7 @@ namespace Learning.Tests
             Assert.AreEqual("Login Successful", result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFailureMessageOnInvalidUserName()
         {
             var userCreator = new UserCreator();
@@ -40,7 +40,7 @@ namespace Learning.Tests
             Assert.AreEqual("Login Failed", result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFailureMessageOnIncorrectPassword()
         {
             var userCreator = new UserCreator();
@@ -52,22 +52,22 @@ namespace Learning.Tests
             Assert.AreEqual("Login Failed", result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldThrowArgumentExceptionWhenUserNameIsEmpty()
         {
 
             var loginHelper = new LoginHelper(new UserCreator());
 
-            Assert.ThrowsException<ArgumentException>(() => loginHelper.Login(string.Empty, validPassword_));
+            Assert.Throws<ArgumentException>(() => loginHelper.Login(string.Empty, validPassword_));
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldThrowArgumentExceptionWhenPasswordIsEmpty()
         {
 
             var loginHelper = new LoginHelper(new UserCreator());
 
-            Assert.ThrowsException<ArgumentException>(() => loginHelper.Login(validUser_, string.Empty));
+            Assert.Throws<ArgumentException>(() => loginHelper.Login(validUser_, string.Empty));
         }
     }
 }

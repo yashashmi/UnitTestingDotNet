@@ -1,22 +1,22 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Learning.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class UserCreatorTests
     {
         string validPassword_;
         string validUser_;
 
-        [TestInitialize]
+        [SetUp]
         public void OneTimeSetup()
         {
             validPassword_ = "Password12";
             validUser_ = "David";
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnSuccessMessageOnCreationOfUser()
         {
             var userCreator = new UserCreator();
@@ -25,7 +25,7 @@ namespace Learning.Tests
             Assert.AreEqual("User created successfully", result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFailureMessageIfUserNameContainsOtherThanLetters()
         {
             var userCreator = new UserCreator();
@@ -34,7 +34,7 @@ namespace Learning.Tests
             Assert.AreEqual("User creation failed", result);
         }
 
-        [TestMethod]
+        [Test]
         public void UserListShouldNotBeNullEvenIfNoUserCreated()
         {
             var userCreator = new UserCreator();
@@ -42,7 +42,7 @@ namespace Learning.Tests
             Assert.IsNotNull(userCreator.Users);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldIncreaseTheUserCountInListOnUserCreation()
         {
             var userCreator = new UserCreator();
@@ -51,7 +51,7 @@ namespace Learning.Tests
             Assert.AreEqual(1, userCreator.Users.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldNotIncreaseTheUserCountInListOnUserCreationFailure()
         {
             var userCreator = new UserCreator();
@@ -60,7 +60,7 @@ namespace Learning.Tests
             Assert.AreEqual(0, userCreator.Users.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFailureMessageIfPasswordIsShorterThanSixCharacters()
         {
             var userCreator = new UserCreator();
@@ -69,7 +69,7 @@ namespace Learning.Tests
             Assert.AreEqual("User creation failed", result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFailureMessageIfPasswordDoesNotContainAtLeastOneAlphabet()
         {
             var userCreator = new UserCreator();
@@ -78,7 +78,7 @@ namespace Learning.Tests
             Assert.AreEqual("User creation failed", result);
         }
 
-        [TestMethod]
+        [Test]
         public void ShouldReturnFailureMessageIfPasswordDoesNotContainAtLeastOneNumber()
         {
             var userCreator = new UserCreator();
