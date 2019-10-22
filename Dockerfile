@@ -14,3 +14,8 @@ RUN for file in $(ls *.csproj); do mkdir ${file%.*}/ && mv $file ${file%.*}/; do
 
 
 RUN dotnet restore
+
+FROM build AS testrunner
+WORKDIR /sln/test
+COPY ./*/*Tests.csproj ./
+ENTRYPOINT ["dotnet", "test", "--logger:trx"]
