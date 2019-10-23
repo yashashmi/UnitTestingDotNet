@@ -8,14 +8,15 @@ COPY ./*.sln ./
 COPY ./*/*.csproj ./
 RUN for file in $(ls *.csproj); do mkdir ${file%.*}/ && mv $file ${file%.*}/; done
 
-# Copy the test project files
-#COPY Learning.Tests/*.csproj ./
-#RUN for file in $(ls *.csproj); do mkdir ${file%.*}/ && mv $file ${file%.*}/; done
-
-
 RUN dotnet restore
 
+# Copy everything else and build
+From build AS compile
+RUN dotnet build --configuration Release
+
+
 FROM build AS testrunner
-WORKDIR /sln/test
-COPY ./*/*Tests.csproj ./
-ENTRYPOINT ["dotnet", "test", "--logger:trx"]
+WORKDIR /sln/
+COPY . ./
+RUN dotnet test 
+#ENTRYPOINT ["dotnet", "test", "Learning.Tests.dll",  "--logger:trx"]
