@@ -16,11 +16,11 @@ node {
         }
 
         stage("Test"){
-            sh "dotnet test --verbosity=minimal --logger trx"
+            sh "dotnet test --verbosity=minimal --logger 'trx;LogFileName=testresults.trx'"
         }
         
         stage("Publish Test Result"){
-            mstest()
+            mstest keepLongStdio: true, testResultsFile: '**/testresults.trx'
         }
     }
 }
