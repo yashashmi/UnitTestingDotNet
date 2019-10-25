@@ -9,7 +9,7 @@ COPY ./*/*.csproj ./
 RUN for file in $(ls *.csproj); do mkdir ${file%.*}/ && mv $file ${file%.*}/; done
 
 RUN dotnet restore
-
+RUN dotnet clean
 # Copy everything else and build
 #From build AS compile
 RUN dotnet build --configuration Release
