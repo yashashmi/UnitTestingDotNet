@@ -5,6 +5,7 @@ node {
 
     stage("CheckOut"){
         git credentialsId: 'GitCredentials', url: 'https://github.com/yashashmi/UnitTestingDotNet'
+        echo "${WORKSPACE}"
     }
 	msImage.inside("${volumeMountingArg}"){
         stage("Restore"){
